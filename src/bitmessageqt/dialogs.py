@@ -2,6 +2,7 @@ from PyQt4 import QtGui
 from tr import _translate
 from retranslateui import RetranslateMixin
 import widgets
+from debug import logger
 
 from newchandialog import NewChanDialog
 from address_dialogs import (
@@ -74,3 +75,11 @@ class ConnectDialog(QtGui.QDialog, RetranslateMixin):
         super(ConnectDialog, self).__init__(parent)
         widgets.load('connect.ui', self)
         self.setFixedSize(QtGui.QWidget.sizeHint(self))
+
+class PasswordDialog(QtGui.QDialog, RetranslateMixin):
+    def __init__(self, parent=None):
+        logger.warning("init PasswordDialog")
+        super(PasswordDialog, self).__init__(parent)
+        widgets.load('password.ui', self)
+        self.setFixedSize(QtGui.QWidget.sizeHint(self))
+
