@@ -234,7 +234,7 @@ class Main:
             checkPassword = (BMConfigParser().safeGet('user', 'password') == passwordDialog.passwordInput.text())
             logger.warning(checkPassword)
                         
-        logger.warning("End : password prompt")
+        #logger.warning("End : password prompt")
 
         # End : password prompt
 
