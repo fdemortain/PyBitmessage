@@ -82,12 +82,14 @@ class PasswordDialog(QtGui.QDialog, RetranslateMixin):
         super(PasswordDialog, self).__init__(parent)
         widgets.load('password.ui', self)
         self.setFixedSize(QtGui.QWidget.sizeHint(self))
-        
+
         self._close = False
         self._ok = False
-        logger.warning(self._close)
-        #self.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.closeButtonClicked())
-        #self.buttonBox.button(QtGui.QDialogButtonBox.Ok).clicked.connect(self.okButtonClicked())
+
+        self.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.closeButtonClicked)        
+        self.buttonBox.button(QtGui.QDialogButtonBox.Ok).clicked.connect(self.okButtonClicked)
+
+        self.show()
 
     def closeButtonClicked(self):
         self._close = True
@@ -97,4 +99,7 @@ class PasswordDialog(QtGui.QDialog, RetranslateMixin):
         self._ok = True
         self._close = False
 
+    def closeEvent(self,event):
+       self.closeButtonClicked()
+       super(PasswordDialog, self).closeEvent(event)
 

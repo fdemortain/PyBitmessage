@@ -202,15 +202,6 @@ if shared.useVeryEasyProofOfWorkForTesting:
     defaults.networkDefaultPayloadLengthExtraBytes = int(
         defaults.networkDefaultPayloadLengthExtraBytes / 100)
 
-#class PasswordDialog(QtGui.QDialog):
-#    def __init__(self):
-#        super(PasswordDialog, self).__init__()
-#        try:
-#            uic.loadUi('password.ui',self)
-#        except Exception as e:
-#            print(e)
-#        self.setFixedSize(QtGui.QDialog.sizeHint(self))
-#        #self.show()
     
 class Main:
     def closeClicked(self):
@@ -219,24 +210,22 @@ class Main:
     def start(self):
         
         # Beginning : password prompt
-        appPassword = QtGui.QApplication(sys.argv)
         logger.warning("Beginning : password prompt")
-        
+        appPassword = QtGui.QApplication(sys.argv)     
         passwordDialog = PasswordDialog()
 
-        # Close dialog if close button is pushed
-        #closeButtonPushed = False
-        #shutdown.doCleanShutdown()
-        #passwordDialog.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.stop())
-      
         if passwordDialog.exec_():
-            #passwordDialog.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.closeClicked)
-            checkPassword = (BMConfigParser().safeGet('user', 'password') == passwordDialog.passwordInput.text())
+            checkPassword = (BMConfigParser().safeGet('user', 'password') ==\
+                    passwordDialog.passwordInput.text())
             logger.warning(checkPassword)
-            logger.warning(passwordDialog._close)                
-            logger.warning(passwordDialog._ok)
-        logger.warning("End : password prompt")
 
+        if passwordDialog._close is True:
+            logger.warning("passwordDialog._close")
+            return            
+        if passwordDialog._ok is True:
+            logger.warning("passwordDialog._ok")
+
+        logger.warning("End : password prompt")
         # End : password prompt
 
 
