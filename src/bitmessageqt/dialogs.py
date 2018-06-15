@@ -1,4 +1,4 @@
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from tr import _translate
 from retranslateui import RetranslateMixin
 import widgets
@@ -82,4 +82,19 @@ class PasswordDialog(QtGui.QDialog, RetranslateMixin):
         super(PasswordDialog, self).__init__(parent)
         widgets.load('password.ui', self)
         self.setFixedSize(QtGui.QWidget.sizeHint(self))
+        
+        self._close = False
+        self._ok = False
+        logger.warning(self._close)
+        #self.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.closeButtonClicked())
+        #self.buttonBox.button(QtGui.QDialogButtonBox.Ok).clicked.connect(self.okButtonClicked())
+
+    def closeButtonClicked(self):
+        self._close = True
+        self._ok = False
+
+    def okButtonClicked(self):
+        self._ok = True
+        self._close = False
+
 

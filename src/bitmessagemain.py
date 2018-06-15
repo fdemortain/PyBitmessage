@@ -227,14 +227,15 @@ class Main:
         # Close dialog if close button is pushed
         #closeButtonPushed = False
         #shutdown.doCleanShutdown()
-        passwordDialog.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.stop())
+        #passwordDialog.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.stop())
       
         if passwordDialog.exec_():
             #passwordDialog.buttonBox.button(QtGui.QDialogButtonBox.Close).clicked.connect(self.closeClicked)
             checkPassword = (BMConfigParser().safeGet('user', 'password') == passwordDialog.passwordInput.text())
             logger.warning(checkPassword)
-                        
-        #logger.warning("End : password prompt")
+            logger.warning(passwordDialog._close)                
+            logger.warning(passwordDialog._ok)
+        logger.warning("End : password prompt")
 
         # End : password prompt
 
